@@ -1,0 +1,31 @@
+﻿@model VendingMachineSystem.Models.Product.ProductRequestModel
+
+<h2 class="mb-4">Create Product</h2>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <p style="color:red">@ViewBag.ErrorMessage</p>
+        }
+        @using (Html.BeginForm("Create", "Product", FormMethod.Post))
+        {
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Price, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Price, new { @class = "form-control", type = "number", min = "0" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Quantity, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control", type = "number", min = "0" })
+                @Html.ValidationMessageFor(m => m.Quantity, "", new { @class = "text-danger" })
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create</button>
+        }
+    </div>
+</div>

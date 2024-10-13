@@ -1,0 +1,49 @@
+﻿@model VendingMachineSystem.Models.Admin.PaginatedList<VendingMachineSystem.AppDbContextModels.AdminUser>
+
+@{
+    int counter = 0;
+}
+
+<h2 class="mb-4">Admin List</h2>
+
+@Html.ActionLink("Create", "AdminRegister", "Admin", null, new { @class = "btn btn-primary" })
+<br />
+<br />
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>User Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (@Model != null)
+            {
+                @foreach (var user in Model.Items)
+                {
+                    counter++;
+
+                    <tr>
+                        <td> @counter </td>
+                        <td>@user.UserName</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <div>
+        @if (Model.HasPreviousPage)
+        {
+            <a asp-action="AdminList" asp-route-pageIndex="@(Model.PageIndex - 1)">Previous</a>
+        }
+
+        <span>Page @Model.PageIndex of @Model.TotalPages</span>
+
+        @if (Model.HasNextPage)
+        {
+            <a asp-action="AdminList" asp-route-pageIndex="@(Model.PageIndex + 1)">Next</a>
+        }
+    </div>
+</div>
